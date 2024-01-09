@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "spatie/laravel-pdf": "^1.6",
+        "spatie/laravel-pdf": "^1.0",
         "wandersonwhcr/romans": "^1.5"
     },
     "autoload": {
