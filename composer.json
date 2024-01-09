@@ -1,0 +1,31 @@
+{
+    "name": "amoschou/scribo",
+    "description": "Create book as a Laravel app from a folder of Markdown files.",
+    "homepage": "https://github.com/amoschou/scribo",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "amoschou",
+            "email": "4948673+amoschou@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "spatie/laravel-pdf": "^1.6",
+        "wandersonwhcr/romans": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AMoschou\\Scribo\\": "src/",
+            "AMoschou\\Scribo\\App\\": "src/app/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AMoschou\\Scribo\\App\\Providers\\ServiceProvider"
+            ]
+        }
+    }
+}
