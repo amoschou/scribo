@@ -8,7 +8,7 @@ use AMoschou\Scribo\App\Classes\File;
 $middleware = config('scribo.middleware');
 
 Route::middleware($middleware)->group(function () {
-    $binderKeys = array_keys(config('scribo.binders'));
+    $binderKeys = array_keys(config('scribo.binders') ?? []);
 
     Route::get('{binder}', function (string $binder) {
         // Front cover of binder
