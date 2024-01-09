@@ -3,7 +3,7 @@
 return [
 
     'paths' => [
-        'src' => resource_path('vendor/scribo/src'),
+        'md' => resource_path('vendor/scribo/md'),
         'pdf' => storage_path('vendor/scribo/pdf'),
     ],
 
