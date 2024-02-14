@@ -7,17 +7,30 @@ return [
         'pdf' => storage_path('vendor/scribo/pdf'),
     ],
 
-    'middleware' => [
+    'default_middleware' => [
         // 'auth',
         // 'verified',
     ],
 
     'binders' => [
-        'default' => [
+        'docs' => [
+            'title' => 'Title',
+            'description' => 'Description',
             'github_repo' => 'githubusername/alpha',
             'github_api_token' => env('GH_API_TOKEN'),
-            'route_prefix' => 'docs',
+            'path' => 'docs',
+            'groups' => [
+                //
+            ],
         ],
+    ],
+
+    'prefix' => 'library',
+
+    'folder_info' => '_index.yaml',
+
+    'menu' => [
+        //
     ],
 
 ];

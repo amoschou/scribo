@@ -1,24 +1,35 @@
 <?php
 
-use AMoschou\Scribo\App\Classes\File;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Route;
-// use Spatie\LaravelPdf\Facades\Pdf;
+use AMoschou\Scribo\App\Http\Controllers\ScriboController;
+use Illuminate\Support\Facades\Route;
 
-$middleware = config('scribo.middleware');
+$middleware = config('scribo.default_middleware') ?? [];
 
-Route::middleware($middleware)->group(function () {
+Route::middleware($middleware)->prefix(config('scribo.prefix') ?? null)->group(function () {
     $binderKeys = array_keys(config('scribo.binders') ?? []);
 
-    Route::get('{binder}', function (string $binder) {
-        // Front cover of binder
-    })->whereIn('binder', $binderKeys);
+    Route::get('{binder}', [ScriboController::class, 'binderHtml'])
+        ->whereIn('binder', $binderKeys)
+        ->name('scribo.binder');
 
-    Route::get('{binder}/{path}', function (string $binder, string $path) {
-        $isPdf = Str::endsWith($path, '.pdf');
+    Route::get('{binder}.pdf', [ScriboController::class, 'binderPdf'])
+        ->whereIn('binder', $binderKeys)
+        ->name('scribo.binder.pdf');
 
-        $localPath = $isPdf ? Str::replaceLast('.pdf', '', $path) : $path;
+    Route::get('{binder}/contents', [ScriboController::class, 'binderContentsHtml'])
+        ->whereIn('binder', $binderKeys)
+        ->name('scribo.contents');
 
-        $file = new File($binder, $localpath);
-    })->whereIn('binder', $binderKeys)->where('path', '.+');
+    Route::get('{binder}/contents.pdf', [ScriboController::class, 'binderContentsPdf'])
+        ->whereIn('binder', $binderKeys)
+        ->name('scribo.contents.pdf');
+    
+    Route::get('{binder}/contents/{path}', [ScriboController::class, 'binderPath'])
+        ->whereIn('binder', $binderKeys)
+        ->where('path', '.+')
+        ->name('scribo.path');
+        
+    Route::get('{binder}/binder.pdf', [ScriboController::class, 'completeBinderPdf'])
+        ->whereIn('binder', $binderKeys)
+        ->name('scribo.complete.binder.pdf');
 });
