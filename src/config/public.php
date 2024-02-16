@@ -7,10 +7,10 @@ return [
         'pdf' => storage_path('vendor/scribo/pdf'),
     ],
 
-    'default_middleware' => [
+    'default_middleware' => env('SCRIBO_MIDDLEWARE', [
         // 'auth',
         // 'verified',
-    ],
+    ]),
 
     'binders' => [
         'docs' => [
