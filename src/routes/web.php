@@ -4,7 +4,7 @@ use AMoschou\Scribo\App\Http\Controllers\ScriboController;
 use AMoschou\Scribo\Scribo;
 use Illuminate\Support\Facades\Route;
 
-$middleware = Scribo::configArr('scribo.default_middleware');
+$middleware = Scribo::config_arr('scribo.default_middleware');
 
 Route::middleware($middleware)->prefix(config('scribo.prefix') ?? null)->group(function () {
     $binderKeys = array_keys(config('scribo.binders') ?? []);
