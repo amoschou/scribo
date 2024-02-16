@@ -1,0 +1,1 @@
+@if (! is_null($tag))<small class="text-body-secondary">{{ $tag }}</small>&ensp;@endif

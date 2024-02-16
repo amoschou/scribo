@@ -1,0 +1,1 @@
+<x-scribo::main-layout :nodeItem="$nodeItem">{!! $nodeItem->getHtml() !!}</x-scribo::main-layout>
