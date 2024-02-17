@@ -52,6 +52,33 @@ class Binder
         return $this->getRootFolder()->getFlatTree();
     }
 
+    public function getFlatList($return = 'any')
+    {
+        $folders = [];
+        $files = [];
+        $any = [];
+        
+        foreach ($this->getFlatTree() as $key => $val) {
+            $type = $val->object->type;
+
+            if ($type === 'folder') {
+                $folders[] = $key;
+            }
+
+            if ($type === 'file') {
+                $files[] = $key;
+            }
+
+            $any[] = $key;
+        }
+
+        return match ($return) {
+            'folders' => $folders,
+            'files' => $files,
+            default => $any,
+        };
+    }
+
     public function getPartwiseOrders()
     {
         $flatTree = $this->getFlatTree();
