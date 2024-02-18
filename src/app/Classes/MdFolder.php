@@ -135,6 +135,10 @@ class MdFolder
             return ! in_array($el, $ignore);
         });
 
+        var_dump('DEBUG: FOLDER LIST AND FILE LIST');
+        var_dump($folderList);
+        var_dump($fileList);
+
         $orderedList = [];
 
         foreach ($folderList as $filename) {
@@ -177,6 +181,7 @@ class MdFolder
 
         $orderedList = Arr::flatten($orderedList);
 
+        var_dump('DEBUG: ORDERED LIST');
         var_dump($orderedList); die();
 
         $tree = [];
