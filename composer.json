@@ -13,6 +13,7 @@
         "wandersonwhcr/romans": "^1.5",
         "howtomakeaturn/pdfinfo": "^1.1",
         "mikehaertl/php-pdftk": "^0.13.1",
+        "spatie/invade": "^2.0",
         "spatie/laravel-pdf": "^1.0"
     },
     "autoload": {
