@@ -125,13 +125,6 @@ class MdFolder
             'root' => $this->getPathname(),
         ]);
 
-        var_dump('DEBUG: PATHNAME, DISK, DIRECTORIES AND FILES');
-        var_dump($this->getPathname());
-        var_dump($disk);
-        var_dump($disk->directories());
-        var_dump($disk->files());
-        die();
-
         $ignore = ['.git', '.github', '_index.yaml'];
 
         $folderList = array_filter($disk->directories(), function ($el) use ($ignore) {
