@@ -125,6 +125,13 @@ class MdFolder
             'root' => $this->getPathname(),
         ]);
 
+        var_dump('DEBUG: PATHNAME, DISK, DIRECTORIES AND FILES');
+        var_dump($this->getPathname());
+        var_dump($disk);
+        var_dump($disk->directories());
+        var_dump($disk->files());
+        die();
+
         $ignore = ['.git', '.github', '_index.yaml'];
 
         $folderList = array_filter($disk->directories(), function ($el) use ($ignore) {
@@ -134,10 +141,6 @@ class MdFolder
         $fileList = array_filter($disk->files(), function ($el) use ($ignore) {
             return ! in_array($el, $ignore);
         });
-
-        var_dump('DEBUG: FOLDER LIST AND FILE LIST');
-        var_dump($folderList);
-        var_dump($fileList);
 
         $orderedList = [];
 
@@ -180,9 +183,6 @@ class MdFolder
         ksort($orderedList);
 
         $orderedList = Arr::flatten($orderedList);
-
-        var_dump('DEBUG: ORDERED LIST');
-        var_dump($orderedList); die();
 
         $tree = [];
 
