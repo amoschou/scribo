@@ -95,7 +95,7 @@ class ScriboController extends Controller
 
         $margin = 10;
 
-        $html = view('scribo::bs-page', $context);
+        $html = view($view, $context);
 
         // dd('debug 5');
 
@@ -125,6 +125,10 @@ class ScriboController extends Controller
             'driver' => 'local',
             'root' => $binder->getPdfPath(),
         ]);
+
+        if ($disk->exists('binder.pdf')) {
+            return $disk->download('binder.pdf');
+        }
 
         $flatTree = $binder->getFlatTree();
 
