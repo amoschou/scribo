@@ -36,17 +36,19 @@ trait NodeItem
         return count(explode('/', $this->localPath));
     }
 
-    public function breadcrumbs()
+    public function breadcrumbs($withContents = true)
     {
         $pathArray = explode('/', $this->localPath);
 
         $breadcrumbs = [];
 
-        $breadcrumbs[] = [
-            'binder' => $this->binder->name,
-            'partial-path' => '/',
-            'title' => 'Contents',
-        ];
+        if ($withContents) {
+            $breadcrumbs[] = [
+                'binder' => $this->binder->name,
+                'partial-path' => '/',
+                'title' => 'Contents',
+            ];
+        }
 
         for ($i = 1; $i < count($pathArray); $i++) {
             $partialPath = implode('/', array_slice($pathArray, 0, $i));

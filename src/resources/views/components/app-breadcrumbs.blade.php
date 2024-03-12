@@ -3,15 +3,19 @@
 
     $partwiseOrders = $binder->getPartwiseOrders();
 
-    $breadcrumbs = $nodeItem->breadcrumbs();
+    $withHomeAndContents = request()->input('format') === 'html';
+
+    $breadcrumbs = $nodeItem->breadcrumbs($withHomeAndContents);
 @endphp
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item">
-        {{-- <a href="{{ route('scribo.binder', ['binder' => $breadcrumbs[0]['binder']]) }}">Binder</a> --}}
-            <a href="{{ route('scribo.binder', ['binder' => $binder->name]) }}">Home</a>
-        </li>
+        @if ($withContents)
+            <li class="breadcrumb-item">
+                {{-- <a href="{{ route('scribo.binder', ['binder' => $breadcrumbs[0]['binder']]) }}">Binder</a> --}}
+                <a href="{{ route('scribo.binder', ['binder' => $binder->name]) }}">Home</a>
+            </li>
+        @endif
 
         @foreach ($breadcrumbs as $breadcrumb)
             <li class="breadcrumb-item">
