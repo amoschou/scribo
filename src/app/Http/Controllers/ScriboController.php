@@ -105,8 +105,8 @@ class ScriboController extends Controller
                 'root' => $context['binder']->getPdfPath(),
             ]);
     
-            if ($disk->exists($context['nodeItem']->getLocalPath())) {
-                return response()->file($disk->path($context['nodeItem']->getLocalPath()));
+            if ($disk->exists('mainmatter/' . $context['nodeItem']->getLocalPath() . '.pdf')) {
+                return response()->file($disk->path('mainmatter/' . $context['nodeItem']->getLocalPath() . '.pdf'));
             }
     
             abort_unless(in_array(config('app.env'), [
