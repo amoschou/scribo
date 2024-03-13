@@ -100,6 +100,22 @@ class ScriboController extends Controller
         }
 
         if ($format === 'pdf') {
+            $disk = Storage::build([
+                'driver' => 'local',
+                'root' => $context['binder']->getPdfPath(),
+            ]);
+    
+            if ($disk->exists($context['nodeItem']->getLocalPath())) {
+                return response()->file($disk->path($context['nodeItem']->getLocalPath()));
+            }
+    
+            abort_unless(in_array(config('app.env'), [
+                'local',
+                'github_runner',
+            ]), 503, 'You requested a PDF file, but it is not yet ready. Hopefully, this page will refresh automatically, so keep the tab open and check here again in a few minutes.', [
+                'Retry-After' => 60,
+            ]);
+
             $pdf = LaravelPdf::view($view, $context)->paperSize(210.0, 297.0, 'mm');
         
             $pdf = $context['isBinder'] ? $pdf : $pdf->footerView('scribo::components.app-pdf-footer');
