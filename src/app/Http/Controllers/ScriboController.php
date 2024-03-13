@@ -91,28 +91,27 @@ class ScriboController extends Controller
     }
 
     private function view($view, $context, $format = 'html', $options = []) {
-        // dd('debug 4');
-
         $margin = 10;
 
-        $html = view($view, $context);
+        if ($format === 'html') {
+            $html = view($view, $context);
 
-        // dd('debug 5');
+            return $html;
+        }
 
-        $pdf = LaravelPdf::view($view, $context)->paperSize(210.0, 297.0, 'mm');
+        if ($format === 'pdf') {
+            $pdf = LaravelPdf::view($view, $context)->paperSize(210.0, 297.0, 'mm');
         
-        $pdf = $context['isBinder'] ? $pdf : $pdf->footerView('scribo::components.app-pdf-footer');
+            $pdf = $context['isBinder'] ? $pdf : $pdf->footerView('scribo::components.app-pdf-footer');
 
-        $pdf->withBrowsershot(function (Browsershot $browsershot) use ($options) {
-                $browsershot->initialPageNumber($options['initialPageNumber'] ?? 1);
-            })
-            ->margins(10, 14, 20, 14, Unit::Millimeter) /* (top, right, bottom, left) */
-            ->name($context['nodeItem']->yamlData('title'));
-
-        return match ($format) {
-            'html' => $html,
-            'pdf' => $pdf,
-        };
+            $pdf->withBrowsershot(function (Browsershot $browsershot) use ($options) {
+                    $browsershot->initialPageNumber($options['initialPageNumber'] ?? 1);
+                })
+                ->margins(10, 14, 20, 14, Unit::Millimeter) /* (top, right, bottom, left) */
+                ->name($context['nodeItem']->yamlData('title'));
+            
+            return $pdf;
+        }
     }
 
     public function completeBinderPdf(Request $request, string $binder)
