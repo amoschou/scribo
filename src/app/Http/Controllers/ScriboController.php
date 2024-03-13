@@ -126,7 +126,7 @@ class ScriboController extends Controller
         ]);
 
         if ($disk->exists('binder.pdf')) {
-            return response()->file($disk->path('binder'));
+            return response()->file($disk->path('binder.pdf'));
 
             // return $disk->download('binder.pdf');
         }
