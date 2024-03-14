@@ -10,7 +10,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb mb-0">
-        @if ($withContents)
+        @if ($withHomeAndContents)
             <li class="breadcrumb-item">
                 {{-- <a href="{{ route('scribo.binder', ['binder' => $breadcrumbs[0]['binder']]) }}">Binder</a> --}}
                 <a href="{{ route('scribo.binder', ['binder' => $binder->name]) }}">Home</a>
