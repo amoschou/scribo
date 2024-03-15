@@ -10,7 +10,7 @@
             @endif
         </div>
 
-        <a class="list-group-item list-group-item-action border-bottom-0" href="{{ route('scribo.complete.binder.pdf', ['binder' => $nodeItem->getBinder()->name]) }}>Download PDF</a>
+        <a class="list-group-item list-group-item-action border-bottom-0" href="{{ route('scribo.complete.binder.pdf', ['binder' => $nodeItem->getBinder()->name]) }}">Download PDF</a>
 
         {{--
         <button type="button" class="list-group-item list-group-item-action border-bottom-0" data-bs-toggle="collapse" data-bs-target="#download-collapse-{{ $id }}" aria-expanded="false" aria-controls="download-collapse-{{ $id }}">Download PDF</button>
