@@ -112,7 +112,7 @@ class ScriboController extends Controller
                 return response()->file($disk->path($frontOrMainMatter . $context['nodeItem']->getLocalPath() . '.pdf'));
             }
 
-            if (! in_array(config('app.env'), ['local', 'github_runner']) {
+            if (! in_array(config('app.env'), ['local', 'github_runner'])) {
                 throw new MissingPdfException('Missing PDF!');
             }
     
