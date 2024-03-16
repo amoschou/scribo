@@ -96,7 +96,7 @@ trait NodeItem
     {
         $globalOrder = $this->findGlobalOrder();
 
-        $explodedGlobalOrder = explode('.', $this->findGlobalOrder());
+        $explodedGlobalOrder = explode('.', $globalOrder);
 
         if (count($explodedGlobalOrder) <= 1) {
             return (new IntToRoman)->filter($globalOrder);
