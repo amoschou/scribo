@@ -154,12 +154,16 @@ class ScriboController extends Controller
             // return $disk->download('binder.pdf');
         }
 
-        abort_unless(in_array(config('app.env'), [
-            'local',
-            'github_runner',
-        ]), 503, 'You requested a PDF file, but it is not yet ready. Hopefully, this page will refresh automatically, so keep the tab open and check here again in a few minutes.', [
-            'Retry-After' => 60,
-        ]);
+        if (! in_array(config('app.env'), ['local', 'github_runner'])) {
+            throw new MissingPdfException('Missing PDF!');
+        }
+
+        // abort_unless(in_array(config('app.env'), [
+        //     'local',
+        //     'github_runner',
+        // ]), 503, 'You requested a PDF file, but it is not yet ready. Hopefully, this page will refresh automatically, so keep the tab open and check here again in a few minutes.', [
+        //     'Retry-After' => 60,
+        // ]);
 
         $flatTree = $binder->getFlatTree();
 
