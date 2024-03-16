@@ -6,6 +6,7 @@ use AMoschou\Scribo\App\Classes\MdFile;
 use AMoschou\Scribo\App\Classes\MdFolder;
 use AMoschou\Scribo\App\Classes\MdNode;
 use AMoschou\Scribo\App\Classes\Binder;
+use AMoschou\Scribo\App\Exceptions\MissingPdfException;
 use Howtomakeaturn\PDFInfo\PDFInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -110,13 +111,17 @@ class ScriboController extends Controller
             if ($disk->exists($frontOrMainMatter . $context['nodeItem']->getLocalPath() . '.pdf')) {
                 return response()->file($disk->path($frontOrMainMatter . $context['nodeItem']->getLocalPath() . '.pdf'));
             }
+
+            if (! in_array(config('app.env'), ['local', 'github_runner']) {
+                throw new MissingPdfException;
+            }
     
-            abort_unless(in_array(config('app.env'), [
-                'local',
-                'github_runner',
-            ]), 503, 'You requested a PDF file, but it is not yet ready. Hopefully, this page will refresh automatically, so keep the tab open and check here again in a few minutes.', [
-                'Retry-After' => 60,
-            ]);
+            // abort_unless(in_array(config('app.env'), [
+            //     'local',
+            //     'github_runner',
+            // ]), 503, 'You requested a PDF file, but it is not yet ready. Hopefully, this page will refresh automatically, so keep the tab open and check here again in a few minutes.', [
+            //     'Retry-After' => 60,
+            // ]);
 
             $pdf = LaravelPdf::view($view, $context)->paperSize(210.0, 297.0, 'mm');
         
