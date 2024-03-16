@@ -22,7 +22,7 @@
                 <x-scribo::app-sidebar-container :nodeItem="$nodeItem" />
             @endif
 
-            <x-scribo::app-content-container :binder="$binder" :nodeItem="$nodeItem" :isBinder="$isBinder" :isContent="$isContent" :options="$options" />
+            <x-scribo::app-content-container :binder="$binder" :nodeItem="$nodeItem" :isBinder="$isBinder" :isContent="$isContent" :options="$options" :alert="$alert"/>
         </div>
 
         <x-scribo::app-scripts at="end" />

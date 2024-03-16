@@ -41,6 +41,10 @@
         @endif
 
         <main class="flex-grow-1 flex-sm-grow-1 container-fluid pt-2">
+            @if ($alert ?? false)
+                <div class="alert alert-warning" role="alert">{{ $alert }}</div>
+            @endif
+
             @if ($nodeItem->type === 'file')
                 {!! $nodeItem->getHtml() !!}
             @endif

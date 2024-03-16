@@ -8,6 +8,15 @@ use Illuminate\Http\Response;
 
 class MissingPdfException extends Exception
 {
+    private $data;
+
+    public function withData($data = null)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
     /**
      * Report the exception.
      */
@@ -23,6 +32,7 @@ class MissingPdfException extends Exception
     {
         return response()->view('scribo::errors.503-missing-pdf', [
             'message' => 'This PDF is currently unavailable. Please try again in a few minutes.',
+            'data' => $this->data ?? [],
         ], 503);
     }
 

@@ -113,7 +113,7 @@ class ScriboController extends Controller
             }
 
             if (! in_array(config('app.env'), ['local', 'github_runner'])) {
-                throw new MissingPdfException('Missing PDF!');
+                throw (new MissingPdfException)->withData($context);
             }
     
             // abort_unless(in_array(config('app.env'), [
@@ -155,7 +155,7 @@ class ScriboController extends Controller
         }
 
         if (! in_array(config('app.env'), ['local', 'github_runner'])) {
-            throw new MissingPdfException('Missing PDF!');
+            throw (new MissingPdfException)->withData($context);
         }
 
         // abort_unless(in_array(config('app.env'), [
