@@ -5,5 +5,5 @@
     :isPdf="$isPdf ?? false"
     :options="$options ?? []"
     :binder="$binder"
+    :alert="$alert ?? null"
 />
--
