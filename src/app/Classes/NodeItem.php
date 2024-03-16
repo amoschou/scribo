@@ -79,9 +79,9 @@ trait NodeItem
         return is_null($suffix) ? $localBinderPath : "{$localBinderPath}.{$suffix}";
     }
 
-    public function findGlobalOrder()
+    public function findGlobalOrder($tmp_SPEEDTHINGSUPBYUSINGTHISBINDERTREE = null)
     {
-        $tree = (object) ['tree' => $this->binder->getTree()];
+        $tree = (object) ['tree' => $tmp_SPEEDTHINGSUPBYUSINGTHISBINDERTREE ?? $this->binder->getTree()];
 
         $localPath = explode('/', $this->localPath);
 
@@ -92,9 +92,9 @@ trait NodeItem
         return $tree->global_order;
     }
 
-    public function findPartwiseOrder()
+    public function findPartwiseOrder($tmp_SPEEDTHINGSUPBYUSINGTHISBINDERTREE = null)
     {
-        $globalOrder = $this->findGlobalOrder();
+        $globalOrder = $this->findGlobalOrder($tmp_SPEEDTHINGSUPBYUSINGTHISBINDERTREE);
 
         $explodedGlobalOrder = explode('.', $globalOrder);
 
