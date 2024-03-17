@@ -1,9 +1,9 @@
 <x-scribo::app-standard-layout
     :nodeItem="$data['nodeItem']"
-    :isBinder="$isBinder ?? false"
-    :isContent="$isContent ?? false"
+    :isBinder="$data['isBinder'] ?? false"
+    :isContent="$data['isContent'] ?? false"
     :isPdf="false"
-    :options="$options ?? []"
+    :options="$data['options'] ?? []"
     :binder="$data['binder']"
     alert="The PDF that you requested is currently unavailable. Try again in a few minutes."
 />
