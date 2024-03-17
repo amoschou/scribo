@@ -7,7 +7,7 @@
 
     <div class="list-group list-group-flush rounded-0">
         @if (request()->input('format') !== 'pdf')
-            <a class="list-group-item list-group-item-action" href="/{{ request()->path() }}.pdf">Download as PDF</a>
+            <a class="list-group-item list-group-item-action" href="/{{ str(request()->path())->replaceLast('.pdf', '')  }}.pdf">Download as PDF</a>
         @endif
 
         <div class="list-group-item">
