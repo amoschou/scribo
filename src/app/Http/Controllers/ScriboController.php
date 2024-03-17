@@ -109,7 +109,7 @@ class ScriboController extends Controller
             $frontOrMainMatter = $context['isBinder'] ? 'frontmatter/' : 'mainmatter/';
 
             if ($frontOrMainMatter === 'frontmatter/') {
-                $file = $context['isContent'] ? 'frontmatter/contents.pdf' : 'frontmatter/cover.pdf';
+                $file = ($context['isContent'] ?? false) ? 'frontmatter/contents.pdf' : 'frontmatter/cover.pdf';
 
                 if ($disk->exists($file)) {
                     return response()->file($disk->path($file));
