@@ -33,4 +33,8 @@ Route::middleware($middleware)->prefix(config('scribo.prefix') ?? null)->group(f
     Route::get('{binder}/binder.pdf', [ScriboController::class, 'completeBinderPdf'])
         ->whereIn('binder', $binderKeys)
         ->name('scribo.complete.binder.pdf');
+    
+    Route::get('/', function () {
+        return redirect(config('scribo.prefix_redirect'));
+    })
 });

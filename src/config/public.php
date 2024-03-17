@@ -27,6 +27,8 @@ return [
 
     'prefix' => 'library',
 
+    'prefix_redirect' => '/',
+
     'folder_info' => '_index.yaml',
 
     'menu' => [
