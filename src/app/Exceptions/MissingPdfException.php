@@ -31,7 +31,6 @@ class MissingPdfException extends Exception
     public function render(Request $request): Response
     {
         return response()->view('scribo::errors.503-missing-pdf', [
-            'message' => 'This PDF is currently unavailable. Please try again in a few minutes.',
             'data' => $this->data ?? [],
         ], 503);
     }
