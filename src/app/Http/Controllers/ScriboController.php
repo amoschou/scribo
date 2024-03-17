@@ -107,9 +107,19 @@ class ScriboController extends Controller
             ]);
 
             $frontOrMainMatter = $context['isBinder'] ? 'frontmatter/' : 'mainmatter/';
-    
-            if ($disk->exists($frontOrMainMatter . $context['nodeItem']->getLocalPath() . '.pdf')) {
-                return response()->file($disk->path($frontOrMainMatter . $context['nodeItem']->getLocalPath() . '.pdf'));
+
+            if ($frontOrMainMatter === 'frontmatter/') {
+                $file = $context['isContent'] ? 'frontmatter/contents.pdf' : 'frontmatter/cover.pdf';
+
+                if ($disk->exists($file)) {
+                    return response()->file($file));
+                }
+            }
+
+            if ($frontOrMainMatter === 'mainmatter/') {
+                if ($disk->exists('mainmatter/' . $context['nodeItem']->getLocalPath() . '.pdf')) {
+                    return response()->file($disk->path('mainmatter/' . $context['nodeItem']->getLocalPath() . '.pdf'));
+                }
             }
 
             if (! in_array(config('app.env'), ['local', 'github_runner'])) {
