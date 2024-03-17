@@ -30,9 +30,9 @@ class MissingPdfException extends Exception
      */
     public function render(Request $request): Response
     {
-        return response()->view('scribo::errors.503-missing-pdf', [
-            'data' => $this->data ?? [],
-        ], 503);
+        $request->merge(['format' => 'html']);
+
+        return response()->view('scribo::errors.503-missing-pdf', $this->data ?? [], 503);
     }
 
     /**
