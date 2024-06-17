@@ -21,7 +21,7 @@ class ScriboController extends Controller
 {
     private function checkAuthorization()
     {
-        Gate::authorize('is-hsc-teacher');
+        Gate::authorize('is-hsc-staff');
     }
 
     public function binderHtml(Request $request, string $binder) {
